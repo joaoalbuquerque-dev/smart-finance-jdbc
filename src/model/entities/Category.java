@@ -1,8 +1,9 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Category {
+public class Category implements Serializable {
 
     private Integer id;
     private String name;

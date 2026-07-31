@@ -1,9 +1,10 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Movement {
+public class Movement implements Serializable {
 
     private Integer id;
     private String description;

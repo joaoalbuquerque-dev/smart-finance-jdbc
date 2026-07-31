@@ -1,8 +1,9 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class AppUser {
+public class AppUser implements Serializable {
     private Integer id;
     private String name;
     private String email;

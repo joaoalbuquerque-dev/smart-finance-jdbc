@@ -1,0 +1,19 @@
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Java
+out/
+target/
+build/
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivo de configuração local
+db.properties

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDaoJDBC implements CategoryDao {
@@ -63,6 +64,28 @@ public class CategoryDaoJDBC implements CategoryDao {
 
     @Override
     public List<Category> findAll() {
-        return List.of();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+             st = conn.prepareStatement(
+                    "SELECT * FROM category ORDER BY  id");
+             rs = st.executeQuery();
+
+             List<Category> list = new ArrayList<>();
+             while(rs.next()) {
+                 Category cat = new Category();
+                 cat.setId(rs.getInt("Id"));
+                 cat.setName(rs.getString("Name"));
+
+                 list.add(cat);
+             }
+             return list;
+        }catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
     }
 }

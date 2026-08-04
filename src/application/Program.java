@@ -21,5 +21,11 @@ public class Program {
         for(Category obj : list) {
             System.out.println(obj);
         }
+
+        System.out.println("TEST 3: Category insert");
+        Category newCategory = new Category(null, "Viagens");
+        categoryDao.insert(newCategory);
+        System.out.println("Inserted! New id = " + newCategory.getId());
+
     }
 }

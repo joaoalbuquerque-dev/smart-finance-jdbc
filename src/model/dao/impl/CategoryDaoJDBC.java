@@ -5,10 +5,7 @@ import db.DbException;
 import model.dao.CategoryDao;
 import model.entities.Category;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +18,36 @@ public class CategoryDaoJDBC implements CategoryDao {
 
     @Override
     public void insert(Category obj) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                "INSERT INTO category "
+                    + "(name) "
+                    + "VALUES "
+                    + "(?)",
+            Statement.RETURN_GENERATED_KEYS);
 
+            st.setString(1, obj.getName());
+
+            int rowsAffected = st.executeUpdate();
+
+           if(rowsAffected > 0) {
+               rs = st.getGeneratedKeys();
+               if(rs.next()) {
+                   int id = rs.getInt(1);
+                   obj.setId(id);
+               }
+           }else {
+               throw new DbException("Unexpected error! No rows affected!");
+           }
+        }catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
     }
 
     @Override
@@ -48,7 +74,7 @@ public class CategoryDaoJDBC implements CategoryDao {
             if(rs.next()) {
                 Category cat = new Category();
                 cat.setId(rs.getInt("id"));
-                cat.setName(rs.getString("Name"));
+                cat.setName(rs.getString("name"));
 
                 return cat;
             }
@@ -74,8 +100,8 @@ public class CategoryDaoJDBC implements CategoryDao {
              List<Category> list = new ArrayList<>();
              while(rs.next()) {
                  Category cat = new Category();
-                 cat.setId(rs.getInt("Id"));
-                 cat.setName(rs.getString("Name"));
+                 cat.setId(rs.getInt("id"));
+                 cat.setName(rs.getString("name"));
 
                  list.add(cat);
              }

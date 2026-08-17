@@ -57,10 +57,16 @@ public class Program {
             System.out.println(obj);
         }
 
-        System.out.println("TEST 3: TransactionType insert");
+        /*System.out.println("TEST 3: TransactionType insert");
         TransactionType newType = new TransactionType(null, "TRANSFER");
         transactionTypeDao.insert(newType);
-        System.out.println("Inserted! New id = " + newType.getId());
+        System.out.println("Inserted! New id = " + newType.getId());*/
+
+        System.out.println("TEST 4: TransactionType update");
+        type = transactionTypeDao.findById(3);
+        type.setName("Transfer");
+        transactionTypeDao.update(type);
+        System.out.println("Update completed");
 
         sc.close();
     }

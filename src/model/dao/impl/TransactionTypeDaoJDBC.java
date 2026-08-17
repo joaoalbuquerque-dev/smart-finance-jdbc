@@ -51,7 +51,23 @@ public class TransactionTypeDaoJDBC implements TransactionTypeDao {
 
     @Override
     public void update(TransactionType obj) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                    "UPDATE transaction_type "
+                    + "SET name = ? "
+                    + "WHERE id = ? ");
 
+            st.setString(1, obj.getName());
+            st.setInt(2, obj.getId());
+
+            st.executeUpdate();
+        }catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

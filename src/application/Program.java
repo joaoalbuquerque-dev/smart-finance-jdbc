@@ -5,6 +5,7 @@ import model.dao.DaoFactory;
 import model.dao.TransactionTypeDao;
 import model.entities.TransactionType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -48,6 +49,13 @@ public class Program {
         System.out.println("TEST 1: TransactionType findById");
         TransactionType type = transactionTypeDao.findById(1);
         System.out.println(type);
+
+        System.out.println("TEST 2: TransactionType findAll");
+        type = new TransactionType();
+        List<TransactionType> list = transactionTypeDao.findAll();
+        for(TransactionType obj : list) {
+            System.out.println(obj);
+        }
 
 
         sc.close();

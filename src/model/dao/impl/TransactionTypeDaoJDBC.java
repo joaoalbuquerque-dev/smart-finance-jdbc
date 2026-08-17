@@ -38,7 +38,7 @@ public class TransactionTypeDaoJDBC implements TransactionTypeDao {
 
         try {
             st = conn.prepareStatement(
-                    "SELECT FROM transaction_type WHERE id = ? ");
+                    "SELECT * FROM transaction_type WHERE id = ? ");
             st.setInt(1, id);
             rs = st.executeQuery();
             if(rs.next()) {

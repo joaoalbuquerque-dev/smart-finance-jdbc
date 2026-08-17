@@ -2,7 +2,8 @@ package application;
 
 import model.dao.CategoryDao;
 import model.dao.DaoFactory;
-import model.entities.Category;
+import model.dao.TransactionTypeDao;
+import model.entities.TransactionType;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public class Program {
 
         CategoryDao categoryDao = DaoFactory.createCategoryDao();
 
-        System.out.println("TEST 1: Category findById");
+       /* System.out.println("TEST 1: Category findById");
         Category category = categoryDao.findById(3);
         System.out.println(category);
 
@@ -28,7 +29,7 @@ public class Program {
         /*System.out.println("TEST 3: Category insert");
         Category newCategory = new Category(null, "Viagens");
         categoryDao.insert(newCategory);
-        System.out.println("Inserted! New id = " + newCategory.getId());*/
+        System.out.println("Inserted! New id = " + newCategory.getId());
 
         System.out.println("TEST 4: Category update");
         category = categoryDao.findById(2);
@@ -40,7 +41,14 @@ public class Program {
         System.out.println("Enter id for delete test");
         int id = sc.nextInt();
         categoryDao.deleteById(id);
-        System.out.println("Delete completed");
+        System.out.println("Delete completed"); */
+
+        TransactionTypeDao transactionTypeDao = DaoFactory.createTransactionTypeDao();
+
+        System.out.println("TEST 1: TransactionType findById");
+        TransactionType type = transactionTypeDao.findById(1);
+        System.out.println(type);
+
 
         sc.close();
     }

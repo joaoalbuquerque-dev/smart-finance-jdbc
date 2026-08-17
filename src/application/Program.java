@@ -22,10 +22,15 @@ public class Program {
             System.out.println(obj);
         }
 
-        System.out.println("TEST 3: Category insert");
+        /*System.out.println("TEST 3: Category insert");
         Category newCategory = new Category(null, "Viagens");
         categoryDao.insert(newCategory);
-        System.out.println("Inserted! New id = " + newCategory.getId());
+        System.out.println("Inserted! New id = " + newCategory.getId());*/
 
+        System.out.println("TEST 4: Category update");
+        category = categoryDao.findById(2);
+        category.setName("Aluguel");
+        categoryDao.update(category);
+        System.out.println("Update Completed");
     }
 }

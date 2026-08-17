@@ -52,7 +52,22 @@ public class CategoryDaoJDBC implements CategoryDao {
 
     @Override
     public void update(Category obj) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                    "UPDATE category "
+                            + "SET name = ? "
+                            + "WHERE id = ? ");
 
+            st.setString(1, obj.getName());
+            st.setInt(2, obj.getId());
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

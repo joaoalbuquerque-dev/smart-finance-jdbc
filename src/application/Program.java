@@ -57,6 +57,10 @@ public class Program {
             System.out.println(obj);
         }
 
+        System.out.println("TEST 3: TransactionType insert");
+        TransactionType newType = new TransactionType(null, "TRANSFER");
+        transactionTypeDao.insert(newType);
+        System.out.println("Inserted! New id = " + newType.getId());
 
         sc.close();
     }

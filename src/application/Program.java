@@ -42,11 +42,11 @@ public class Program {
         System.out.println("Enter id for delete test");
         int id = sc.nextInt();
         categoryDao.deleteById(id);
-        System.out.println("Delete completed"); */
+        System.out.println("Delete completed!"); */
 
         TransactionTypeDao transactionTypeDao = DaoFactory.createTransactionTypeDao();
 
-        System.out.println("TEST 1: TransactionType findById");
+        /*System.out.println("TEST 1: TransactionType findById");
         TransactionType type = transactionTypeDao.findById(1);
         System.out.println(type);
 
@@ -57,16 +57,22 @@ public class Program {
             System.out.println(obj);
         }
 
-        /*System.out.println("TEST 3: TransactionType insert");
+        System.out.println("TEST 3: TransactionType insert");
         TransactionType newType = new TransactionType(null, "TRANSFER");
         transactionTypeDao.insert(newType);
-        System.out.println("Inserted! New id = " + newType.getId());*/
+        System.out.println("Inserted! New id = " + newType.getId());
 
         System.out.println("TEST 4: TransactionType update");
         type = transactionTypeDao.findById(3);
         type.setName("Transfer");
         transactionTypeDao.update(type);
         System.out.println("Update completed");
+
+        System.out.println("TEST 5: TransactionType deleteById");
+        System.out.println("Enter id for delete test");
+        int id = sc.nextInt();
+        transactionTypeDao.deleteById(id);
+        System.out.println("Delete completed!");*/
 
         sc.close();
     }

@@ -41,7 +41,8 @@ public class CategoryDaoJDBC implements CategoryDao {
            }else {
                throw new DbException("Unexpected error! No rows affected!");
            }
-        }catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
         finally {
@@ -63,7 +64,8 @@ public class CategoryDaoJDBC implements CategoryDao {
             st.setInt(2, obj.getId());
 
             st.executeUpdate();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
@@ -77,6 +79,7 @@ public class CategoryDaoJDBC implements CategoryDao {
             st = conn.prepareStatement(
                     "DELETE FROM category WHERE id = ?");
             st.setInt(1, id);
+
             st.executeUpdate();
         }
         catch (SQLException e) {
@@ -106,7 +109,8 @@ public class CategoryDaoJDBC implements CategoryDao {
                 return cat;
             }
             return null;
-        }catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
         finally {
@@ -133,7 +137,8 @@ public class CategoryDaoJDBC implements CategoryDao {
                  list.add(cat);
              }
              return list;
-        }catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
         finally {

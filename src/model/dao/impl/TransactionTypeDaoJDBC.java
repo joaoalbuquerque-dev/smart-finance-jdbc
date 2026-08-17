@@ -40,7 +40,8 @@ public class TransactionTypeDaoJDBC implements TransactionTypeDao {
             else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
-        }catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
         finally {
@@ -62,7 +63,8 @@ public class TransactionTypeDaoJDBC implements TransactionTypeDao {
             st.setInt(2, obj.getId());
 
             st.executeUpdate();
-        }catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
         finally {
@@ -72,7 +74,21 @@ public class TransactionTypeDaoJDBC implements TransactionTypeDao {
 
     @Override
     public void deleteById(Integer id) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                    "DELETE FROM transaction_type WHERE id = ? ");
 
+            st.setInt(1, id);
+
+            st.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override
@@ -93,7 +109,8 @@ public class TransactionTypeDaoJDBC implements TransactionTypeDao {
                 return type;
             }
             return null;
-        }catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
         finally {
@@ -122,7 +139,8 @@ public class TransactionTypeDaoJDBC implements TransactionTypeDao {
                 list.add(type);
             }
             return list;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
         finally {

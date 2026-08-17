@@ -5,9 +5,12 @@ import model.dao.DaoFactory;
 import model.entities.Category;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Program {
     public static void main (String[] args) {
+
+        Scanner sc = new Scanner(System.in);
 
         CategoryDao categoryDao = DaoFactory.createCategoryDao();
 
@@ -32,5 +35,13 @@ public class Program {
         category.setName("Aluguel");
         categoryDao.update(category);
         System.out.println("Update Completed");
+
+        System.out.println("TEST 5: Category update");
+        System.out.println("Enter id for delete test");
+        int id = sc.nextInt();
+        categoryDao.deleteById(id);
+        System.out.println("Delete completed");
+
+        sc.close();
     }
 }

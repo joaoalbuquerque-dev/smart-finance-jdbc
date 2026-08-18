@@ -1,8 +1,10 @@
 package application;
 
+import model.dao.AppUserDao;
 import model.dao.CategoryDao;
 import model.dao.DaoFactory;
 import model.dao.TransactionTypeDao;
+import model.entities.AppUser;
 import model.entities.TransactionType;
 
 import java.util.ArrayList;
@@ -73,6 +75,12 @@ public class Program {
         int id = sc.nextInt();
         transactionTypeDao.deleteById(id);
         System.out.println("Delete completed!");*/
+
+        AppUserDao appUserDao = DaoFactory.createAppUserDao();
+
+        System.out.println("TEST 1: AppUser findById");
+        AppUser user = appUserDao.findById(1);
+        System.out.println(user);
 
         sc.close();
     }

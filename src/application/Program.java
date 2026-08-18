@@ -82,6 +82,13 @@ public class Program {
         AppUser user = appUserDao.findById(1);
         System.out.println(user);
 
+        System.out.println("TEST 2: AppUser findAll");
+        user = new AppUser();
+        List<AppUser> list = appUserDao.findAll();
+        for (AppUser obj : list) {
+            System.out.println(obj);
+        }
+
         sc.close();
     }
 }

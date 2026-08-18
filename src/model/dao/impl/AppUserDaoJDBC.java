@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppUserDaoJDBC implements AppUserDao {
@@ -64,6 +65,33 @@ public class AppUserDaoJDBC implements AppUserDao {
 
     @Override
     public List<AppUser> findAll() {
-        return List.of();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement(
+                    "SELECT * FROM app_user ORDER BY id ");
+
+            rs = st.executeQuery();
+
+            List<AppUser> list = new ArrayList<>();
+            while(rs.next()) {
+                AppUser user = new AppUser();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+
+                list.add(user);
+            }
+            return list;
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
     }
 }

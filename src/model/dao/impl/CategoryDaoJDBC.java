@@ -66,7 +66,7 @@ public class CategoryDaoJDBC implements CategoryDao {
             int rowsAffected = st.executeUpdate();
 
             if(rowsAffected == 0) {
-                System.out.println("No category found with this id!");
+                throw new DbException("No category found with this id!");
             }
         }
         catch (SQLException e) {
@@ -87,9 +87,8 @@ public class CategoryDaoJDBC implements CategoryDao {
             int rowsAffected = st.executeUpdate();
 
             if(rowsAffected == 0) {
-                System.out.println("No category found with this id!");
+                throw new DbException ("No category found with this id!");
             }
-
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());

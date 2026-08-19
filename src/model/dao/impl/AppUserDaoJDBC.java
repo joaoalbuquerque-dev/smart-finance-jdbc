@@ -67,7 +67,7 @@ public class AppUserDaoJDBC implements AppUserDao {
             int rowsAffected = st.executeUpdate();
 
             if(rowsAffected == 0) {
-                System.out.println("No user found with this id!");
+                throw new DbException("No user found with this id!");
             }
         }
         catch (SQLException e) {
@@ -81,7 +81,24 @@ public class AppUserDaoJDBC implements AppUserDao {
 
     @Override
     public void deleteById(Integer id) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                    "DELETE FROM app_user WHERE id = ? ");
+            st.setInt(1, id);
 
+            int rowsAffected = st.executeUpdate();
+
+            if(rowsAffected == 0) {
+                throw new DbException("No user found with this id!");
+            }
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

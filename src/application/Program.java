@@ -89,10 +89,16 @@ public class Program {
             System.out.println(obj);
         }
 
-        System.out.println("TEST 3: AppUser insert");
+       /* System.out.println("TEST 3: AppUser insert");
         AppUser newUser = new AppUser(null, "José", "jose@email.com", "123456");
         appUserDao.insert(newUser);
-        System.out.println("Inserted! New id = " + newUser.getId());
+        System.out.println("Inserted! New id = " + newUser.getId());*/
+
+        System.out.println("TEST 4: AppUser update");
+        user = appUserDao.findById(1);
+        user.setName("João Victor");
+        appUserDao.update(user);
+        System.out.println("Update completed");
 
         sc.close();
     }

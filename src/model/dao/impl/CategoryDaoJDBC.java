@@ -63,7 +63,11 @@ public class CategoryDaoJDBC implements CategoryDao {
             st.setString(1, obj.getName());
             st.setInt(2, obj.getId());
 
-            st.executeUpdate();
+            int rowsAffected = st.executeUpdate();
+
+            if(rowsAffected == 0) {
+                System.out.println("No category found with this id!");
+            }
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -80,7 +84,12 @@ public class CategoryDaoJDBC implements CategoryDao {
                     "DELETE FROM category WHERE id = ?");
             st.setInt(1, id);
 
-            st.executeUpdate();
+            int rowsAffected = st.executeUpdate();
+
+            if(rowsAffected == 0) {
+                System.out.println("No category found with this id!");
+            }
+
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());

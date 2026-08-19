@@ -62,7 +62,11 @@ public class TransactionTypeDaoJDBC implements TransactionTypeDao {
             st.setString(1, obj.getName());
             st.setInt(2, obj.getId());
 
-            st.executeUpdate();
+            int rowsAffected = st.executeUpdate();
+
+            if(rowsAffected == 0) {
+                System.out.println("No transaction type found with this id!");
+            }
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -81,7 +85,11 @@ public class TransactionTypeDaoJDBC implements TransactionTypeDao {
 
             st.setInt(1, id);
 
-            st.executeUpdate();
+            int rowsAffected = st.executeUpdate();
+
+            if(rowsAffected == 0) {
+                System.out.println("No transaction type found with this id!");
+            }
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());

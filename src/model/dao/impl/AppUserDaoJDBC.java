@@ -53,6 +53,29 @@ public class AppUserDaoJDBC implements AppUserDao {
 
     @Override
     public void update(AppUser obj) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                    "UPDATE app_user "
+                    + "SET name = ?, email = ?, password = ? "
+                    + "WHERE id = ? ");
+            st.setString(1, obj.getName());
+            st.setString(2, obj.getEmail());
+            st.setString(3, obj.getPassword());
+            st.setInt(4, obj.getId());
+
+            int rowsAffected = st.executeUpdate();
+
+            if(rowsAffected == 0) {
+                System.out.println("No user found with this id!");
+            }
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
 
     }
 

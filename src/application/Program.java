@@ -89,6 +89,11 @@ public class Program {
             System.out.println(obj);
         }
 
+        System.out.println("TEST 3: AppUser insert");
+        AppUser newUser = new AppUser(null, "José", "jose@email.com", "123456");
+        appUserDao.insert(newUser);
+        System.out.println("Inserted! New id = " + newUser.getId());
+
         sc.close();
     }
 }

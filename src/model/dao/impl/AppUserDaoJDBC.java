@@ -5,10 +5,7 @@ import db.DbException;
 import model.dao.AppUserDao;
 import model.entities.AppUser;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +16,39 @@ public class AppUserDaoJDBC implements AppUserDao {
 
     @Override
     public void insert(AppUser obj) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                    "INSERT INTO app_user "
+                    + "(name, email, password) "
+                    + "VALUES "
+                    + "(?, ?, ?) ",
+                    Statement.RETURN_GENERATED_KEYS );
+            st.setString(1, obj.getName());
+            st.setString(2, obj.getEmail());
+            st.setString(3, obj.getPassword());
 
+            int rowsAffected = st.executeUpdate();
+
+            if(rowsAffected > 0) {
+                rs = st.getGeneratedKeys();
+                if(rs.next()) {
+                    int id = rs.getInt(1);
+                    obj.setId(id);
+                }
+            }
+            else {
+                throw new DbException("Unexpected error! No rows affected!");
+            }
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
     }
 
     @Override

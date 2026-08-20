@@ -1,14 +1,8 @@
 package application;
 
-import model.dao.AppUserDao;
-import model.dao.CategoryDao;
-import model.dao.DaoFactory;
-import model.dao.TransactionTypeDao;
-import model.entities.AppUser;
-import model.entities.TransactionType;
+import model.dao.*;
+import model.entities.Account;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Program {
@@ -78,7 +72,7 @@ public class Program {
 
         AppUserDao appUserDao = DaoFactory.createAppUserDao();
 
-        System.out.println("TEST 1: AppUser findById");
+        /*System.out.println("TEST 1: AppUser findById");
         AppUser user = appUserDao.findById(1);
         System.out.println(user);
 
@@ -89,16 +83,25 @@ public class Program {
             System.out.println(obj);
         }
 
-       /* System.out.println("TEST 3: AppUser insert");
+       System.out.println("TEST 3: AppUser insert");
         AppUser newUser = new AppUser(null, "José", "jose@email.com", "123456");
         appUserDao.insert(newUser);
-        System.out.println("Inserted! New id = " + newUser.getId());*/
+        System.out.println("Inserted! New id = " + newUser.getId());
 
         System.out.println("TEST 4: AppUser update");
         user = appUserDao.findById(1);
-        user.setName("João Victor");
+        user.setName("João");
         appUserDao.update(user);
         System.out.println("Update completed");
+
+        System.out.println("TEST 5: AppUser deleteById");
+        System.out.println("Enter id for delete test");
+        int id = sc.nextInt();
+        appUserDao.deleteById(id);*/
+
+        AccountDao accountDao = DaoFactory.createAccountDao();
+        Account account = accountDao.findById(1);
+        System.out.println(account);
 
         sc.close();
     }
